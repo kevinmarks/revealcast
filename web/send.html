@@ -16,7 +16,7 @@ if (cast && cast.isAvailable) {
         event.data.source == "CastApi" &&
         event.data.event == "Hello")
       initializeApi();
-  }));
+  });
 };
 initializeApi = function() {
   cast_api = new cast.Api();
