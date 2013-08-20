@@ -18,9 +18,10 @@ if (cast && cast.isAvailable) {
       initializeApi();
   });
 };
+
 initializeApi = function() {
   cast_api = new cast.Api();
-  cast_api.addReceiverListener("AntennaPod", onReceiverList);
+  cast_api.addReceiverListener("49dc8cb6-8804-4982-be6c-0178e0b49c3a", onReceiverList);
 };
 
 onReceiverList = function(list) {
@@ -33,7 +34,7 @@ onReceiverList = function(list) {
 };
 
 doLaunch = function(receiver) {
-  var request = new cast.LaunchRequest("AntennaPod", receiver);
+  var request = new cast.LaunchRequest("49dc8cb6-8804-4982-be6c-0178e0b49c3a", receiver);
   request.parameters = "v=abcdefg";
   request.description = new cast.LaunchDescription();
   request.description.text = "My Podcast";
