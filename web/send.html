@@ -6,7 +6,7 @@
 <script type="text/javascript">
 var cast_api, cv_activity;
 
-if (cast && cast.isAvailable) {
+if (window.cast != undefined && cast.isAvailable) {
   // Cast is known to be available
   initializeApi();
 } else {
