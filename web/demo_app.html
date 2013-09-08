@@ -1,0 +1,72 @@
+<!--
+Copyright (C) 2013 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html ng-app data-cast-api-enabled="true">
+<head>
+  <title>Cast Chrome Sender API Demo</title>
+  <link rel="stylesheet" type="text/css" href="demo_app.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="demo_app.js"></script>
+</head>
+<body ng-controller="DemoAppCtrl">
+  <div ng-switch on="castApiDetected" >
+    <span ng-switch-default><b>No Cast API is detected.</b></span>
+
+    <div ng-switch-when="true">
+      <form ng-submit="setApplication()">
+        <div>
+          <h3 style="display: inline-block">Cast application name:</h3>
+          <input type="text" ng-model="$parent.appName" size="30" placeholder="Your application name"/>
+        </div>
+        <div>
+          <h3 style="display: inline-block">Launch parameters (optional):</h3>
+          <input type="text" ng-model="$parent.launchParameters" size="60" placeholder="Launch parameters"/>
+        </div>
+        <div>
+          <input type="submit" value="Set"/>
+        </div>
+      </form>
+
+      <div ng-show="showReceiverPicker" id="receiverPicker">
+        <h3>Select a device to launch this activity:</h3>
+        <div ng-repeat="receiver in $parent.receiverList" ng-click="launchActivityAt(receiver)" class="device">
+          {{receiver.name}}
+        </div>
+      </div>
+
+      <div ng-show="showActivityControls">
+        <h3>Remote controls</h3>
+        <button ng-click="stopActivity()">Stop</button>
+        <button ng-click="playMedia()" ng-show="$parent.hasPause">Play</button>
+        <button ng-click="pauseMedia()" ng-show="$parent.hasPause">Pause</button>
+        <button ng-click="muteMedia()">Mute</button>
+        <button ng-click="unmuteMedia()">Unmute</button>
+        <input ng-model="$parent.mediaVolume" min="0.0" max="1.0" type="number" size="3"/>Volume
+        <div>
+          <button ng-click="getActivityStatus()">Get Activity Status</button>
+          <span>{{$parent.activityStatus}}</span>
+        </div>
+        <div>
+          <button ng-click="getMediaStatus()">Get Media Status</button>
+          <span>{{$parent.mediaStatus}}</span>
+        </div>
+      </div>
+      <h4>{{$parent.errorMessage}}</h4>
+    </div>
+  </div>
+</body>
+</html>
